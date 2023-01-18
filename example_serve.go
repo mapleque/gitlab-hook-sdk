@@ -8,7 +8,7 @@ import (
 	"github.com/mapleque/gitlab-hook-sdk/webhook"
 )
 
-func Example_serve() {
+func main() {
 	var opts []webhook.Option
 	secret := os.Getenv("GITLAB_WEBHOOK_SECRET")
 	if secret != "" {
