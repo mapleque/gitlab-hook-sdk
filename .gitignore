@@ -7,3 +7,4 @@
 !*.go
 !webhook
 !webhook/*.go
+webhook/*_test.go

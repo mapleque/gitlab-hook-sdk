@@ -193,7 +193,7 @@ type MergeRequestObjectAttributes struct {
 	WorkInProgress  bool       `json:"work_in_progress"`
 	URL             string     `json:"url"`
 	Action          string     `json:"action"`
-	AssigneeIds     []string   `json:"assignee_ids"`
+	AssigneeIds     []int64    `json:"assignee_ids"`
 }
 
 // CommentObjectAttributes contains Gitlab event note object
@@ -251,15 +251,15 @@ type Assignee struct {
 
 // Repository contains Gitlab event repository information
 type Repository struct {
-	Name        string       `json:"name"`
-	URL         string       `json:"url"`
-	Description stringChange `json:"description"`
-	Homepage    string       `json:"homepage"`
+	Name        string `json:"name"`
+	URL         string `json:"url"`
+	Description string `json:"description"`
+	Homepage    string `json:"homepage"`
 }
 
 // Commit contains Gitlab event commit information
 type Commit struct {
-	Id        int64      `json:"id"`
+	Id        string     `json:"id"`
 	Message   string     `json:"message"`
 	Title     string     `json:"title"`
 	Timestamp customTime `json:"timestamp"`
