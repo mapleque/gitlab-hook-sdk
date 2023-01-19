@@ -21,7 +21,6 @@ type Webhook struct {
 
 	defaultHandler WebhookHandler
 
-	tagEventHandler          WebhookHandler
 	issueEventHandler        WebhookHandler
 	mergeRequestEventHandler WebhookHandler
 	commentEventHandler      WebhookHandler
@@ -32,7 +31,6 @@ func New(opts ...Option) (*Webhook, error) {
 	hook := &Webhook{
 		secret:                   "",
 		defaultHandler:           nil,
-		tagEventHandler:          nil,
 		issueEventHandler:        nil,
 		mergeRequestEventHandler: nil,
 		commentEventHandler:      nil,
@@ -45,10 +43,6 @@ func New(opts ...Option) (*Webhook, error) {
 	// deal empty handler
 	if hook.defaultHandler == nil {
 		hook.defaultHandler = defaultHandler
-	}
-
-	if hook.tagEventHandler == nil {
-		hook.tagEventHandler = hook.defaultHandler
 	}
 
 	if hook.issueEventHandler == nil {
@@ -73,8 +67,6 @@ func (hook *Webhook) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	switch p := payload.(type) {
-	case TagEventPayload:
-		hook.tagEventHandler(p)
 	case IssueEventPayload:
 		hook.issueEventHandler(p)
 	case MergeRequestEventPayload:

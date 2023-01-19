@@ -33,16 +33,6 @@ func (HandlerOptions) IssueEvent(h func(IssueEventPayload)) Option {
 	}
 }
 
-// TagEvent register tagEventHandler
-func (HandlerOptions) TagEvent(h func(TagEventPayload)) Option {
-	return func(hook *Webhook) error {
-		hook.tagEventHandler = func(p Payload) {
-			h(p.(TagEventPayload))
-		}
-		return nil
-	}
-}
-
 // MergeRequestEvent register mergeRequestEventHandler
 func (HandlerOptions) MergeRequestEvent(
 	h func(MergeRequestEventPayload),
